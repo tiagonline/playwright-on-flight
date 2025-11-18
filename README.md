@@ -39,3 +39,5 @@ Para levar este projeto para um ambiente de produção Onfly, os próximos passo
 1.  **Integração com Xray/Jira:** Integrar o relatório de testes para que os cenários sejam visíveis no painel de gestão de testes da equipe ( percebi que o Xray é usado na Onfly).
 2.  **Mocks & Fixtures:** Migrar os dados de Login e Checkout para o arquivo de Fixtures do Playwright para maior segurança e reuso de dados.
 3.  **API Testing:** Adicionar o módulo de testes de API (Backend) no mesmo pipeline para garantir a qualidade de ponta a ponta (mesmo com a API ServeRest fora do ar, o design do teste já estaria pronto).
+4. **Contrato de Testes (Pact)**: Implementar o Contract Testing (ferramentas como Pact) nas APIs internas. Com isso melhora e garante a arquitetura de QA e que o time de Backend nunca quebre acidentalmente a integração com o Frontend ou com outro microserviço da Onfly, por exemplo, aumentando a confiança no deploy.
+5. **Performance no CI**: Integrar Testes de Performance (K6) diretamente no pipeline de CI/CD. Esse ponto previne lentidão no checkout ou nas buscas de passagens (que custam dinheiro) antes que o código vá para produção.
