@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {},
-  "keywords": [],
-  "author": "",
+  "keywords": ["playwright", "e2e", "BDD"],
+  "author": "Tiago Silva",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
