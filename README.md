@@ -11,7 +11,7 @@
 
 ## Sobre o Projeto
 
-Teste técnico e estruturei um plano de automação E2E em **Playwright + TypeScript**.
+Este teste técnico foi estruturado um plano de automação E2E em **Playwright + TypeScript**.
 
 - Usei o **Page Object Model (POM)** para garantir alta manutenibilidade e a metodologia **BDD** para tornar os testes legíveis por QAs e PMs.  
 - O projeto já inclui pipelines de **CI/CD** (Web e API), provando que a solução é escalável e está pronta para ser integrada ao processo de entrega contínua da Onfly.
@@ -55,7 +55,7 @@ npx playwright install --with-deps
 
 Para validar o fluxo E2E de Checkout:
 
-#### ▶ Executar testes (Headless)
+#### Executar testes (Headless)
 
 ```bash
 npx playwright test
@@ -72,7 +72,7 @@ npx playwright show-report
 ### 3. Rodar Testes de API (Newman)
 Para validar o CRUD de Usuários (GoRest):
 
-> **Nota:** O token de autenticação não é versionado por segurança. Você deve fornecer seu próprio Token Bearer (GoRest) via linha de comando.
+> **Nota:** O token de autenticação não é versionado por segurança. Você deve fornecer seu próprio Token Bearer (GoRest) via linha de comando. Por segurança, nas execuções do Github Actions o token foi embedado como secret.
 
 ```bash
 # Executar via npx injetando o token
