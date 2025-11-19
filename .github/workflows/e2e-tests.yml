@@ -1,4 +1,4 @@
-name: Playwright Tests (CI/CD)
+name: E2E Tests (Playwright)
 on:
   push:
     branches: [ main, master ]
@@ -6,12 +6,12 @@ on:
     branches: [ main, master ]
 
 jobs:
-  test:
+  e2e-tests:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
     steps:
-    # 1. Baixa o seu código
+    # 1. Baixa o código
     - uses: actions/checkout@v4
 
     # 2. Instala o Node.js
