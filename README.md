@@ -26,6 +26,7 @@ Este teste técnico foi estruturado um plano de automação E2E em **Playwright 
    - **Web (Playwright):** Testes E2E de fluxo crítico (Checkout) com cenários positivos, negativos e de exceção.  
    - **API (Postman/Newman):** Testes de integração de CRUD com validação de contrato e dados dinâmicos.  
 4. **CI/CD (GitHub Actions):** Pipelines automatizados para Web e API com geração de artefatos (Reports) e segurança de tokens (Secrets).
+5. **Monitoramento Sintético (Cron Job):** Rodar testes de API agendados (09:00 AM). Criar alertas antecipados de falha antes do cliente perceber.
 
 ---
 
@@ -91,3 +92,5 @@ Para evoluir este projeto em um ambiente de produção na Onfly, minha estratég
 2. **Contract Testing (Pact):** Implementar testes de contrato nas APIs críticas para garantir que mudanças no Backend não quebrem o Frontend ou Mobile.  
 3. **Performance no Pipeline:** Integrar testes de carga com K6 diretamente no CI para validar a performance de endpoints críticos (ex: busca de passagens).  
 4. **IA & Self-Healing:** Explorar recursos de IA para "auto-correção" de seletores (self-healing), visando reduzir o custo de manutenção dos scripts a longo prazo.
+5. **Regressão Visual (Percy.io):** Comparação de pixels (snapshots) garante que o CSS não quebrou e que a marca/UX está intacta.
+6. **Cross-browser em Nuvem (BrowserStack):** Rodar os testes do Playwright em grids na nuvem (Safari, Edge, Mobile Real Devices). Como a Onfly é acessada de diversos dispositivos, eu conectaria o pipeline ao BrowserStack para garantir a compatibilidade com Safari (iOS) e dispositivos móveis, sem precisar gerenciar infraestrutura interna.
