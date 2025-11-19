@@ -1,46 +1,93 @@
 # ✈️ playwright-on-flight
 
-[![Playwright Tests (CI/CD)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/e2e-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/e2e-tests.yml)
+[![Playwright Tests (CI/CD)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/playwright.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/playwright.yml)
 [![API Tests (Postman/Newman)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/api-tests.yml/badge.svg)](https://github.com/tiagonline/playwright-on-flight/actions/workflows/api-tests.yml)
 
 **Projeto de Automação Full Stack (Web & API) para Avaliação Técnica - Onfly**
 
 **Candidato:** Tiago Silva
 
-**Objetivo:** Atender a solicitação do desafio técnico: **Definir casos de testes e criar a automação E2E (Ponta a Ponta) para um fluxo de compras de e-commerce utilizando Playwright** (sem finalizar a compra).
+---
+
+## 📋 Sobre o Projeto
+
+Teste técnico e estruturei um plano de automação E2E em **Playwright + TypeScript**.
+
+- Usei o **Page Object Model (POM)** para garantir alta manutenibilidade e a metodologia **BDD** para tornar os testes legíveis por QAs e PMs.  
+- O projeto já inclui pipelines de **CI/CD** (Web e API), provando que a solução é escalável e está pronta para ser integrada ao processo de entrega contínua da Onfly.
 
 ---
 
-## 1. Decisões de Arquitetura
+## 💡 Decisões de Arquitetura
 
-Este projeto foi construído em **Playwright (TypeScript)**, escolhido por sua estabilidade em CI/CD e velocidade.
+1. **Page Object Model (POM):** Separação total entre a lógica do teste e os seletores da página, facilitando a manutenção.  
+2. **BDD Style:** Uso de `test.step` para criar relatórios que funcionam como **documentação viva** dos cenários.  
+3. **Full Stack QA:**
+   - **Web (Playwright):** Testes E2E de fluxo crítico (Checkout) com cenários positivos, negativos e de exceção.  
+   - **API (Postman/Newman):** Testes de integração de CRUD com validação de contrato e dados dinâmicos.  
+4. **CI/CD (GitHub Actions):** Pipelines automatizados para Web e API com geração de artefatos (Reports) e segurança de tokens (Secrets).
 
-1.  **Page Object Model (POM):** Arquitetura utilizada para garantir **manutenibilidade** e **separação de responsabilidades**. O teste lê como uma história do usuário, e a manutenção dos seletores é centralizada (Design Pattern essencial que a Fernanda irá gostar).
-2.  **BDD Style:** As etapas de teste foram definidas usando `test.step` para que o relatório (rodar `npx playwright show-report`) funcione como **documentação viva** (BDD Style), facilitando o entendimento para Stakeholders e QAs.
-3.  **CI/CD (DevOps):** O projeto já inclui um pipeline básico (no `.github/workflows/playwright.yml`) para rodar os testes automaticamente no GitHub Actions.
+---
 
-## 2. Requisitos & Execução
+## 💻 Como Executar
 
-### Pré-requisitos
+### 🧩 Pré-requisitos
 
 - Node.js (v18+)
 - Playwright Browsers (instalado via `npm init playwright`)
 
-### Execução
+---
 
-1.  Clone o repositório.
-2.  Instale as dependências: `npm install`
-3.  Execute o teste (Headless): `npx playwright test`
-4.  Visualize o Relatório HTML: `npx playwright show-report`
+### 1️⃣ Instalação
+
+Clone o repositório e instale as dependências:
+
+```bash
+git clone https://github.com/tiagonline/playwright-on-flight.git
+cd playwright-on-flight
+npm install
+npx playwright install --with-deps
+```
 
 ---
 
-## 3. Próximos Passos
+### 2️⃣ Rodar Testes Web (Playwright)
 
-Para levar este projeto para um ambiente de produção Onfly, os próximos passos seriam:
+Para validar o fluxo E2E de Checkout:
 
-1.  **Integração com Xray/Jira:** Integrar o relatório de testes para que os cenários sejam visíveis no painel de gestão de testes da equipe ( percebi que o Xray é usado na Onfly).
-2.  **Mocks & Fixtures:** Migrar os dados de Login e Checkout para o arquivo de Fixtures do Playwright para maior segurança e reuso de dados.
-3.  **API Testing:** Adicionar o módulo de testes de API (Backend) no mesmo pipeline para garantir a qualidade de ponta a ponta (mesmo com a API ServeRest fora do ar, o design do teste já estaria pronto).
-4. **Contrato de Testes (Pact)**: Implementar o Contract Testing (ferramentas como Pact) nas APIs internas. Com isso melhora e garante a arquitetura de QA e que o time de Backend nunca quebre acidentalmente a integração com o Frontend ou com outro microserviço da Onfly, por exemplo, aumentando a confiança no deploy.
-5. **Performance no CI**: Integrar Testes de Performance (K6) diretamente no pipeline de CI/CD. Esse ponto previne lentidão no checkout ou nas buscas de passagens (que custam dinheiro) antes que o código vá para produção.
+#### ▶️ Executar testes (Headless)
+
+```bash
+npx playwright test
+```
+
+#### 📊 Visualizar relatório (Trace Viewer)
+
+```bash
+npx playwright show-report
+```
+
+---
+
+### 3️⃣ Rodar Testes de API (Newman)
+
+Para validar o CRUD de Usuários (GoRest):
+
+> **Nota:** É necessário ter o newman instalado ou usar via `npx`.
+
+#### ▶️ Executar via npx (sem instalação global)
+
+```bash
+npx newman run tests/api/GoRest_CRUD.postman_collection.json   -e tests/api/GoRest_Env.postman_environment.json   --reporters cli,htmlextra
+```
+
+---
+
+## ✅ Próximos Passos (Visão de Futuro)
+
+Para evoluir este projeto em um ambiente de produção na Onfly, minha estratégia seria:
+
+1. **Integração com Xray/Jira:** Conectar o relatório de testes para visibilidade total do time de gestão.  
+2. **Contract Testing (Pact):** Implementar testes de contrato nas APIs críticas para garantir que mudanças no Backend não quebrem o Frontend ou Mobile.  
+3. **Performance no Pipeline:** Integrar testes de carga com K6 diretamente no CI para validar a performance de endpoints críticos (ex: busca de passagens).  
+4. **IA & Self-Healing:** Explorar recursos de IA para "auto-correção" de seletores (self-healing), visando reduzir o custo de manutenção dos scripts a longo prazo.
