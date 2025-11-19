@@ -1,8 +1,9 @@
 # ✈️ playwright-on-flight
 
-**Projeto de Automação E2E para Avaliação Técnica - Onfly**
+![Web Tests](https://github.com/tiagonline/playwright-on-flight/actions/workflows/playwright.yml/badge.svg)
+![API Tests](https://github.com/tiagonline/playwright-on-flight/actions/workflows/api-tests.yml/badge.svg)
 
-![Playwright Tests](https://github.com/tiagonline/playwright-on-flight/actions/workflows/playwright.yml/badge.svg)
+**Projeto de Automação Full Stack (Web & API) para Avaliação Técnica - Onfly**
 
 **Candidato:** Tiago Silva
 
