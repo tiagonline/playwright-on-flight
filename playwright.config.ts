@@ -11,7 +11,7 @@ export default defineConfig({
   use: {
     headless: true,
     baseURL: "https://www.saucedemo.com/",
-    video: "on-first-retry",
+    video: "on",
     trace: "on",
     screenshot: "only-on-failure",
   },
