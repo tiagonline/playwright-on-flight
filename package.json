@@ -11,7 +11,7 @@
   "scripts": {
     "test": "playwright test",
     "test:ui": "playwright test --ui",
-    "test:api": "newman run tests/api/GoRest_CRUD.postman_collection.json -e tests/api/GoRest_Env.postman_environment.json --reporters cli"
+    "test:api": "newman run tests/api/GoRest_CRUD.postman_collection.json -e tests/api/GoRest_Env.postman_environment.json --reporters cli,htmlextra"
   },
   "keywords": [
     "playwright",

@@ -77,10 +77,7 @@ Para validar o CRUD de Usuários (GoRest):
 
 ```bash
 # Executar via npx injetando o token
-npx newman run tests/api/GoRest_CRUD.postman_collection.json \
--e tests/api/GoRest_Env.postman_environment.json \
---env-var "token=SEU_TOKEN_AQUI" \
---reporters cli,htmlextra
+npm run test:api -- --env-var "token=SEU_TOKEN_AQUI"
 ```
 **Nota sobre CI/CD da API:** Os testes de API automatizados via Cron Job podem apresentar instabilidade (falso-negativo) devido ao bloqueio de segurança (WAF/Cloudflare) da API pública GoRest contra os IPs dos runners do GitHub Actions, ainda mais que coloquei o monitoramento sintético todo dia as 9h. Em um ambiente real corporativo, isso seria resolvido com Whitelist de IPs.
 
