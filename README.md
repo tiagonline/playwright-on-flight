@@ -20,14 +20,34 @@ Este teste técnico foi estruturado com foco em **Qualidade de Engenharia, Segur
 
 ## Decisões de Arquitetura
 
-1. **Segurança & Ambiente:** Credenciais injetadas via `process.env` (lidas de um `.env` localmente ou Secrets no CI), garantindo que dados sensíveis nunca sejam versionados (padrão Sênior).
-2. **Page Object Model (POM) Escalável:** Separação total da lógica. Métodos de Page Object (e.g., `addItemToCart(itemName)`) são genéricos, garantindo que o código não precise ser alterado quando novos produtos forem adicionados.
-3. **Maturidade Técnica:** Uso de scripts `lint` e `format` no `package.json` para manter o código limpo e padronizado.
-4. **Full Stack QA:**
-   - **Web (Playwright):** Testes E2E de fluxo crítico (Checkout) com cenários positivos, negativos e de exceção.  
-   - **API (Postman/Newman):** Testes de integração de CRUD com validação de contrato e dados dinâmicos.  
-5. **CI/CD (GitHub Actions):** Pipelines automatizados para Web e API com geração de artefatos (Reports) e segurança de tokens (Secrets).
-6. **Monitoramento Sintético (Cron Job):** Rodar testes de API agendados para criar alertas antecipados de falha antes do cliente perceber.
+## Decisões de Arquitetura
+
+1. **Segurança & Ambiente (Zero Hardcoding):**
+   - Credenciais sensíveis (login válido) são injetadas via **`process.env`**, lidas de um arquivo `.env` (local) ou GitHub Secrets (CI/CD). Nenhum dado sensível é versionado no repositório.
+
+2. **Robustez de Dados (Data Fuzzing com Faker):**
+   - A dependência de massas de dados estáticas (`fixtures.json`) foi eliminada para dados de teste.
+   - Utilizei a biblioteca **`@faker-js/faker`** para gerar dinamicamente:
+     - Credenciais inválidas (usuário/senha) para testes de segurança/negativos.
+     - Dados cadastrais (Nome, Sobrenome, CEP) para o fluxo de checkout, garantindo que cada execução utilize um perfil de comprador único e isolado.
+
+3. **Page Object Model (POM) Escalável:**
+   - A arquitetura de páginas foi desenhada para ser agnóstica ao conteúdo específico.
+   - Exemplo: O método `addItemToCart(itemName)` na `InventoryPage` é **genérico**, construindo seletores dinamicamente. Isso permite adicionar novos produtos ao teste sem precisar alterar uma única linha de código na página.
+
+4. **Maturidade Técnica & Governança:**
+   - Implementação de **ESLint** e **Prettier** (`npm run lint` / `npm run format`) para garantir que todo o código siga um padrão estrito de qualidade e formatação, facilitando a revisão de código e manutenção em equipe.
+
+5. **Estratégia Full Stack QA:**
+   - **Web (Playwright):** Foco na validação da jornada crítica do usuário (E2E).
+   - **API (Postman/Newman):** Foco na validação de contratos, regras de negócio e CRUD de forma rápida e isolada.
+
+6. **CI/CD (GitHub Actions):**
+   - Pipelines configurados para execução automática em cada *push* ou *pull request*.
+   - Geração e armazenamento de artefatos de teste (Relatórios HTML e Traces) para depuração rápida de falhas no pipeline.
+
+7. **Monitoramento Sintético (Shift-Right):**
+   - Agendamento de testes de API (Cron Job) para execução diária, permitindo a detecção proativa de degradação de serviço antes que afete o usuário final.
 
 ---
 
