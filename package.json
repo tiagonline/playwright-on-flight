@@ -15,7 +15,7 @@
   },
   "license": "ISC",
   "main": "index.js",
-  "name": "playwright-on-flight",
+  "name": "playwright-clean-architecture-poc",
   "scripts": {
     "postinstall": "npx playwright install --with-deps",
     "test": "playwright test",
